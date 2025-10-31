@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "330126285555",
-    "project_id": "doctorappointmentapp-62068",
-    "storage_bucket": "doctorappointmentapp-62068.firebasestorage.app"
+    "project_number": "448243860576",
+    "project_id": "appointmentappfront",
+    "storage_bucket": "appointmentappfront.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:330126285555:android:fd403fad3c26b369ea7586",
+        "mobilesdk_app_id": "1:448243860576:android:2f9c4df10064fbcbb9ef05",
         "android_client_info": {
           "package_name": "com.example.appointmentapp_lilianavecino"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAfOyMfi6tcWX_52LO7f0ZLteMwzergvuQ"
+          "current_key": "AIzaSyDOnKBXQELSuEaxQK-kuBqJTj0Np-pM4kQ"
         }
       ],
       "services": {

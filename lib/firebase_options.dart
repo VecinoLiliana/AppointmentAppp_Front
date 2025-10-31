@@ -33,10 +33,7 @@ class DefaultFirebaseOptions {
           'you can reconfigure this by running the FlutterFire CLI again.',
         );
       case TargetPlatform.windows:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for windows - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return windows;
       case TargetPlatform.linux:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for linux - '
@@ -50,19 +47,31 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyCamNjYb2Ql9dO-KBUmvyMQJEOTNKWrPSA',
-    appId: '1:330126285555:web:745cebde138a32b6ea7586',
-    messagingSenderId: '330126285555',
-    projectId: 'doctorappointmentapp-62068',
-    authDomain: 'doctorappointmentapp-62068.firebaseapp.com',
-    storageBucket: 'doctorappointmentapp-62068.firebasestorage.app',
+    apiKey: 'AIzaSyC3U-ToSHeMcu32oyGowBHx_NleB6gJQus',
+    appId: '1:448243860576:web:031d9e6311ffbf20b9ef05',
+    messagingSenderId: '448243860576',
+    projectId: 'appointmentappfront',
+    authDomain: 'appointmentappfront.firebaseapp.com',
+    storageBucket: 'appointmentappfront.firebasestorage.app',
+    measurementId: 'G-FK65XHQMNV',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyAfOyMfi6tcWX_52LO7f0ZLteMwzergvuQ',
-    appId: '1:330126285555:android:fd403fad3c26b369ea7586',
-    messagingSenderId: '330126285555',
-    projectId: 'doctorappointmentapp-62068',
-    storageBucket: 'doctorappointmentapp-62068.firebasestorage.app',
+    apiKey: 'AIzaSyDOnKBXQELSuEaxQK-kuBqJTj0Np-pM4kQ',
+    appId: '1:448243860576:android:2f9c4df10064fbcbb9ef05',
+    messagingSenderId: '448243860576',
+    projectId: 'appointmentappfront',
+    storageBucket: 'appointmentappfront.firebasestorage.app',
   );
+
+  static const FirebaseOptions windows = FirebaseOptions(
+    apiKey: 'AIzaSyC3U-ToSHeMcu32oyGowBHx_NleB6gJQus',
+    appId: '1:448243860576:web:c44852f113abe226b9ef05',
+    messagingSenderId: '448243860576',
+    projectId: 'appointmentappfront',
+    authDomain: 'appointmentappfront.firebaseapp.com',
+    storageBucket: 'appointmentappfront.firebasestorage.app',
+    measurementId: 'G-EFD93G2KRF',
+  );
+
 }

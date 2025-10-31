@@ -3,17 +3,17 @@
 <plist version="1.0">
 <dict>
 	<key>API_KEY</key>
-	<string>AIzaSyAQrYx8J6oUD-AVt1SIn_7OxpbtQLbOELU</string>
+	<string>AIzaSyCDGTEWrX8WWRU4If10ddWbE4iaKqgAnzo</string>
 	<key>GCM_SENDER_ID</key>
-	<string>330126285555</string>
+	<string>448243860576</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.example.appointmentappLilianavecino</string>
 	<key>PROJECT_ID</key>
-	<string>doctorappointmentapp-62068</string>
+	<string>appointmentappfront</string>
 	<key>STORAGE_BUCKET</key>
-	<string>doctorappointmentapp-62068.firebasestorage.app</string>
+	<string>appointmentappfront.firebasestorage.app</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -25,6 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:330126285555:ios:e2a6a319d27734b3ea7586</string>
+	<string>1:448243860576:ios:c6587a2295785f53b9ef05</string>
 </dict>
 </plist>
