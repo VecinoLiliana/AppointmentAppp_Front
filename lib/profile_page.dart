@@ -18,6 +18,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
   final _formKey = GlobalKey<FormState>();
 
+  //Controladores de los campos del formulario
   final TextEditingController nombreController = TextEditingController();
   final TextEditingController telefonoController = TextEditingController();
   final TextEditingController enfermedadesController = TextEditingController();
@@ -31,7 +32,7 @@ class _ProfilePageState extends State<ProfilePage> {
   static const kCream     = Color(0xFFF3EBD8);
   static const kOlive     = Color(0xFFB6BB79); // secundario
 
-  // Cambia a kRoseLight si prefieres inputs rosados
+
   final Color fill = Colors.white;
 
   @override
@@ -49,6 +50,7 @@ class _ProfilePageState extends State<ProfilePage> {
     super.dispose();
   }
 
+  //carga usuairio desde Firestore
   Future<void> _loadUserData() async {
     try {
       final user = _auth.currentUser;
@@ -77,6 +79,7 @@ class _ProfilePageState extends State<ProfilePage> {
     }
   }
 
+  //guardar datos del usuario en
   Future<void> _saveUserData() async {
     if (!_formKey.currentState!.validate()) return;
 

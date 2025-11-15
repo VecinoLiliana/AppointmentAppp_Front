@@ -12,14 +12,25 @@ class _MessagesPageState extends State<MessagesPage> {
   int _selectedIndex = 1;
 
   final avatars = List.generate(6, (i) => "Dr. ${i + 1}");
-  final chats = List.generate(
-    8,
-    (i) => (
-      name: "Doctor Name",
-      msg: "Hello, Doctor, are you there? ...",
-      time: "12:3${i % 10}"
-    ),
-  );
+  
+  //Lista dinámica de mensajes (placeholders)
+  final List<Map<String, String>> mensajes = [
+    {
+      "remitente": "Dr. Ramírez",
+      "hora": "10:45 AM",
+      "mensaje": "Hola, recuerda tu cita mañana temprano."
+    },
+    {
+      "remitente": "Clínica Central",
+      "hora": "9:12 AM",
+      "mensaje": "Tus resultados están disponibles."
+    },
+    {
+      "remitente": "Nutrióloga Pérez",
+      "hora": "Ayer",
+      "mensaje": "No olvides enviar tu registro semanal."
+    },
+  ];
 
   void _onItemTapped(int index) {
     if (index == _selectedIndex) return;
@@ -40,7 +51,7 @@ class _MessagesPageState extends State<MessagesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false, // 🔹 Quita la flecha
+        automaticallyImplyLeading: false, 
         title: const Text("Mensajes"),
         centerTitle: true,
         backgroundColor: Colors.white,
@@ -52,7 +63,7 @@ class _MessagesPageState extends State<MessagesPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // 🔍 Barra de búsqueda
+              //Barra de búsqueda
               Material(
                 elevation: 1,
                 borderRadius: BorderRadius.circular(14),
@@ -73,7 +84,7 @@ class _MessagesPageState extends State<MessagesPage> {
               ),
               const SizedBox(height: 16),
 
-              // 🧑‍⚕️ Avatares horizontales
+              // Iconocs horizontales
               SizedBox(
                 height: 78,
                 child: ListView.separated(
@@ -87,31 +98,46 @@ class _MessagesPageState extends State<MessagesPage> {
 
               // 💬 Lista de chats
               ListView.separated(
-                itemCount: chats.length,
+                itemCount: mensajes.length,
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 separatorBuilder: (_, __) => const Divider(height: 1),
                 itemBuilder: (context, i) {
-                  final c = chats[i];
+                  final mensaje = mensajes[i];
                   return ListTile(
                     leading: const CircleAvatar(
                       radius: 24,
                       backgroundImage: AssetImage('lib/assets/doctor_avatar.png'),
                     ),
                     title: Text(
-                      c.name,
+                      mensaje["remitente"]!,
                       style: const TextStyle(fontWeight: FontWeight.w700),
                     ),
                     subtitle: Text(
-                      c.msg,
+                      mensaje["mensaje"]!,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
                     trailing: Text(
-                      c.time,
+                      mensaje["hora"]!,
                       style: const TextStyle(fontSize: 12, color: Colors.black54),
                     ),
-                    onTap: null,
+                    // Abrir detalles del mensaje
+                    onTap: () {
+                      showDialog(
+                        context: context,
+                        builder: (_) => AlertDialog(
+                          title: Text(mensaje["remitente"]!),
+                          content: Text(mensaje["mensaje"]!),
+                          actions: [
+                            TextButton(
+                              onPressed: () => Navigator.pop(context),
+                              child: const Text("Cerrar"),
+                            )
+                          ],
+                        ),
+                      );
+                    },
                   );
                 },
               ),
@@ -120,7 +146,22 @@ class _MessagesPageState extends State<MessagesPage> {
         ),
       ),
 
-      // 🔸 Menú inferior persistente
+      //Botón flotante para agregar los mensajes
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: const Color(0xFFF297A0), // Rosa BloomBites
+        child: const Icon(Icons.add, color: Colors.white),
+        onPressed: () {
+          setState(() {
+            mensajes.add({
+              "remitente": "Sistema Médico",
+              "hora": "Ahora",
+              "mensaje": "Nuevo mensaje automático de prueba."
+            });
+          });
+        },
+      ),
+
+      //Menú inferior 
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
