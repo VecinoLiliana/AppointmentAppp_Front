@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'routes.dart';
 
@@ -115,31 +116,82 @@ class HomePage extends StatelessWidget {
               ),
               const SizedBox(height: 20),
 
-              // Tarjetas principales
-              Row(
-                children: [
-                  Expanded(
-                    child: _ActionCard(
-                      title: "Agendar una Cita",
-                      subtitle: "Programa tu consulta",
-                      icon: Icons.add_circle_outline,
-                      bg: kRoseLight,
-                      iconColor: kRose,
-                      onPressed: () => Navigator.pushReplacementNamed(context, Routes.citas),
-                    ),
-                  ),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: _ActionCard(
-                      title: "Consejos médicos",
-                      subtitle: "Alivio inmediato",
-                      icon: Icons.health_and_safety_outlined,
-                      bg: kRoseLight,
-                      iconColor: kRose,
-                      onPressed: () {},
-                    ),
-                  ),
-                ],
+              // Tarjetas principales basadas en rol
+              StreamBuilder<DocumentSnapshot>(
+                stream: FirebaseFirestore.instance
+                    .collection('usuarios')
+                    .doc(user?.uid)
+                    .snapshots(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(
+                      child: Padding(
+                        padding: EdgeInsets.all(32.0),
+                        child: CircularProgressIndicator(color: kRose),
+                      ),
+                    );
+                  }
+
+                  final rol = snapshot.hasData && snapshot.data!.exists
+                      ? (snapshot.data!.data() as Map<String, dynamic>)['rol'] ?? 'paciente'
+                      : 'paciente';
+
+                  // Si es médico, mostrar botón de Dashboard
+                  if (rol == 'médico') {
+                    return Row(
+                      children: [
+                        Expanded(
+                          child: _ActionCard(
+                            title: "Ver Dashboard",
+                            subtitle: "Estadísticas y citas",
+                            icon: Icons.dashboard_outlined,
+                            bg: kRoseLight,
+                            iconColor: kRose,
+                            onPressed: () => Navigator.pushReplacementNamed(context, Routes.dashboard),
+                          ),
+                        ),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: _ActionCard(
+                            title: "Ver Citas",
+                            subtitle: "Gestionar consultas",
+                            icon: Icons.calendar_month_outlined,
+                            bg: kRoseLight,
+                            iconColor: kRose,
+                            onPressed: () => Navigator.pushReplacementNamed(context, Routes.doctorAppointments),
+                          ),
+                        ),
+                      ],
+                    );
+                  }
+
+                  // Si es paciente, mostrar botón de Agendar Cita
+                  return Row(
+                    children: [
+                      Expanded(
+                        child: _ActionCard(
+                          title: "Agregar Cita",
+                          subtitle: "Programa tu consulta",
+                          icon: Icons.add_circle_outline,
+                          bg: kRoseLight,
+                          iconColor: kRose,
+                          onPressed: () => Navigator.pushReplacementNamed(context, Routes.citas),
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: _ActionCard(
+                          title: "Mis Citas",
+                          subtitle: "Ver mis consultas",
+                          icon: Icons.event_note_outlined,
+                          bg: kRoseLight,
+                          iconColor: kRose,
+                          onPressed: () => Navigator.pushReplacementNamed(context, Routes.citas),
+                        ),
+                      ),
+                    ],
+                  );
+                },
               ),
               const SizedBox(height: 20),
 

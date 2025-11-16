@@ -27,7 +27,8 @@ class _LoginPageState extends State<LoginPage> {
   // Solo registro
   final nameCtrl = TextEditingController();
   final phoneCtrl = TextEditingController();
-  final allergiesCtrl = TextEditingController(); // coma-separado
+  final allergiesCtrl = TextEditingController(); 
+  String _selectedRole = 'Paciente'; // rol por defecto
 
   // Paleta
   static const kRose = Color(0xFFF297A0);     // principal
@@ -75,7 +76,7 @@ class _LoginPageState extends State<LoginPage> {
           'telefono': phoneCtrl.text.trim(),
           'alergias': alergias,
           'enfermedades': '',
-          'rol': 'paciente',
+          'rol': _selectedRole.toLowerCase(),
           'createdAt': FieldValue.serverTimestamp(),
           'updatedAt': FieldValue.serverTimestamp(),
         }, SetOptions(merge: true));
@@ -167,16 +168,14 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  // Cambia fillColor a kRoseLight si prefieres campos rosados:
-  // final fill = kRoseLight;
-  final Color fill = Colors.white;
+  final fill = kRoseLight;
 
   InputDecoration _prettyInput(String label, {String? hint}) {
     return InputDecoration(
       labelText: label,
       hintText: hint,
       filled: true,
-      fillColor: fill, // <--- blanco (o cambia a kRoseLight)
+      fillColor: fill,
       labelStyle: GoogleFonts.nunito(color: Colors.black87),
       hintStyle: GoogleFonts.nunito(color: Colors.black54),
       border: OutlineInputBorder(
@@ -259,6 +258,27 @@ class _LoginPageState extends State<LoginPage> {
                           controller: allergiesCtrl,
                           decoration: _prettyInput('Alergias (separadas por coma)', hint: 'Penicilina, Mariscos'),
                           style: GoogleFonts.nunito(fontSize: 16),
+                        ),
+                        const SizedBox(height: 12),
+                        DropdownButtonFormField<String>(
+                          initialValue: _selectedRole,
+                          decoration: _prettyInput('Rol'),
+                          style: GoogleFonts.nunito(fontSize: 16, color: Colors.black87),
+                          dropdownColor: Colors.white,
+                          items: ['Paciente', 'Médico'].map((String role) {
+                            return DropdownMenuItem<String>(
+                              value: role,
+                              child: Text(role),
+                            );
+                          }).toList(),
+                          onChanged: (String? newValue) {
+                            if (newValue != null) {
+                              setState(() {
+                                _selectedRole = newValue;
+                              });
+                            }
+                          },
+                          validator: (v) => v == null ? 'Selecciona un rol' : null,
                         ),
                         const SizedBox(height: 12),
                       ],

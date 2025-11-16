@@ -25,6 +25,7 @@ class _ProfilePageState extends State<ProfilePage> {
   final TextEditingController alergiasController = TextEditingController();
 
   bool _loading = false;
+  String _selectedRole = 'Paciente'; // rol por defecto
 
   // Paleta Bloombites
   static const kRose      = Color(0xFFF297A0); // principal
@@ -69,6 +70,10 @@ class _ProfilePageState extends State<ProfilePage> {
         alergiasController.text = alergiasList.map((e) => e.toString()).join(', ');
       }
 
+      // Cargar el rol y capitalizar la primera letra
+      final String rol = (data['rol'] ?? 'paciente') as String;
+      _selectedRole = rol[0].toUpperCase() + rol.substring(1);
+
       setState(() {});
     } catch (e) {
       if (mounted) {
@@ -99,6 +104,7 @@ class _ProfilePageState extends State<ProfilePage> {
         'telefono': telefonoController.text.trim(),
         'enfermedades': enfermedadesController.text.trim(),
         'alergias': alergias,
+        'rol': _selectedRole.toLowerCase(),
         'email': user.email,
         'uid': user.uid,
         'updatedAt': FieldValue.serverTimestamp(),
@@ -277,6 +283,28 @@ class _ProfilePageState extends State<ProfilePage> {
                         decoration: _prettyInput('Enfermedades'),
                         style: GoogleFonts.nunito(fontSize: 16),
                         maxLines: 3,
+                      ),
+                      const SizedBox(height: 12),
+
+                      DropdownButtonFormField<String>(
+                        initialValue: _selectedRole,
+                        decoration: _prettyInput('Rol'),
+                        style: GoogleFonts.nunito(fontSize: 16, color: Colors.black87),
+                        dropdownColor: Colors.white,
+                        items: ['Paciente', 'Médico'].map((String role) {
+                          return DropdownMenuItem<String>(
+                            value: role,
+                            child: Text(role),
+                          );
+                        }).toList(),
+                        onChanged: (String? newValue) {
+                          if (newValue != null) {
+                            setState(() {
+                              _selectedRole = newValue;
+                            });
+                          }
+                        },
+                        validator: (v) => v == null ? 'Selecciona un rol' : null,
                       ),
                       const SizedBox(height: 20),
 

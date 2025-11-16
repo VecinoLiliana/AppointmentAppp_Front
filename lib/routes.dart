@@ -4,10 +4,14 @@ import 'home_page.dart';
 import 'profile_page.dart';
 import 'login_page.dart';
 import 'citas_page.dart';
+import 'dashboard_page.dart';
+import 'doctor_appointments_page.dart';
 
 class Routes {
   static const String login ='/login';
   static const String home ='/home';
+  static const String dashboard = '/dashboard';
+  static const String doctorAppointments = '/doctor-appointments';
   static const messages = '/messages';
   static const String profile ='/profile';
   static const settings = '/settings';
@@ -23,6 +27,10 @@ class Routes {
         return MaterialPageRoute(builder: (_) => LoginPage());
       case home:
         return MaterialPageRoute(builder: (_) => const HomePage());
+      case dashboard:
+        return MaterialPageRoute(builder: (_) => const DashboardPage());
+      case doctorAppointments:
+        return MaterialPageRoute(builder: (_) => const DoctorAppointmentsPage());
       case profile:
         return MaterialPageRoute(builder: (_) => const ProfilePage());
       case citas:
