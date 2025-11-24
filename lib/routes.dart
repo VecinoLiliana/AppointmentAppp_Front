@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'home_page.dart';
 import 'profile_page.dart';
+import 'graphics_page.dart';
 import 'login_page.dart';
 import 'citas_page.dart';
 import 'dashboard_page.dart';
@@ -19,6 +20,7 @@ class Routes {
   static const createAppointment = '/appointments/create';
   static const appointmentsList = '/appointments';
   static const appointmentForm = '/appointments/form';
+  static const graphics = '/graphics';
 
 
   static Route<dynamic> generateRoute(RouteSettings settings){
@@ -35,6 +37,8 @@ class Routes {
         return MaterialPageRoute(builder: (_) => const ProfilePage());
       case citas:
         return MaterialPageRoute(builder: (_) => const CitasPage());
+      case graphics:
+        return MaterialPageRoute(builder: (_) => const GraphicsPage());
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(

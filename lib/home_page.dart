@@ -195,24 +195,26 @@ class HomePage extends StatelessWidget {
               ),
               const SizedBox(height: 20),
 
-              Text(
-                "Especialistas",
-                style: GoogleFonts.fredoka(fontSize: 18, fontWeight: FontWeight.w700),
-              ),
-              const SizedBox(height: 10),
-
-              Wrap(
-                spacing: 8,
-                runSpacing: 8,
-                children: const [
-                  _ChipEspecialista(text: "Cardiólogo"),
-                  _ChipEspecialista(text: "Dermatólogo"),
-                  _ChipEspecialista(text: "Pediatra"),
-                  _ChipEspecialista(text: "Ginecólogo"),
-                  _ChipEspecialista(text: "Ortopedista"),
-                  _ChipEspecialista(text: "Nutriólogo"),
-                  _ChipEspecialista(text: "Oftalmólogo"),
-                ],
+              // Botón para acceder a las gráficas (cambiado por las especialidades)
+              Center(
+                child: ElevatedButton.icon(
+                  onPressed: () => Navigator.pushNamed(context, Routes.graphics),
+                  icon: const Icon(Icons.analytics_outlined, color: Colors.white),
+                  label: Text(
+                    "Ver Gráficas",
+                    style: GoogleFonts.nunito(
+                      fontWeight: FontWeight.w700,
+                      color: Colors.white,
+                    ),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: kRose,
+                    foregroundColor: Colors.white,
+                    padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                    minimumSize: const Size(220, 48),
+                  ),
+                ),
               ),
 
               const SizedBox(height: 20),
